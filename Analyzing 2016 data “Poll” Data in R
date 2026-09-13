@@ -1,0 +1,42 @@
+#https://rprogrammingjournalsammyzighighi.wordpress.com/2026/09/13/assignment-3-assignment-3-analyzing-2016-data-poll-data-in-r/
+
+library(ggplot2)
+
+
+Name <- c("Jeb", "Donald", "Ted", "Marco", "Carly", "Hillary", "Bernie")
+
+ABC_poll <- c(4, 62, 51, 21, 2, 14, 15)
+
+CBS_poll <- c(12, 75, 43, 19, 1, 21, 19)
+
+df_polls <- data.frame(Name, ABC_poll, CBS_poll)
+
+str(df_polls)
+head(df_polls)
+
+mean(df_polls$ABC_poll)
+median(df_polls$CBS_poll)
+
+range(df_polls[, c("ABC_poll", "CBS_poll")])
+
+df_polls$Diff <- df_polls$CBS_poll - df_polls$ABC_poll
+
+df_polls
+
+df_long <- data.frame(
+  Name = rep(df_polls$Name, 2),
+  Poll = rep(c("ABC", "CBS"), each = nrow(df_polls)),
+  Percentage = c(df_polls$ABC_poll, df_polls$CBS_poll)
+)
+
+ggplot(df_long, aes(x = Name, y = Percentage, fill = Poll)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "ABC and CBS Poll Results",
+    x = "Candidate",
+    y = "Poll Percentage"
+  ) +
+  theme_minimal()
+
+# Save the plot
+ggsave("poll_results.png", width = 8, height = 6)
