@@ -1,12 +1,1 @@
-Package: Friedman
-Title: Simple Tools for Reporting Friedman Rank Tests
-Version: 0.0.0.9000
-Authors@R: person("Sammy", "Zighighi", role = c("aut", "cre"))
-Description: Provides a small, reproducible helper for running the
-    Friedman rank sum test and returning its main results in a
-    convenient data-frame format. The package is intended to help
-    students and analysts summarize repeated-measures comparisons.
-Depends: R (>= 3.1.2)
-Imports: ggplot2, dplyr
-License: CC0
-LazyData: false
+
