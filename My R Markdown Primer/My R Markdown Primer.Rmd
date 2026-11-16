@@ -1,0 +1,42 @@
+---
+title: "My R Markdown Primer"
+author: "Sammy Zighighi"
+date: "2026-11-15"
+output: html_document
+---
+
+# R Markdown is a tool that combines written explanations, R code, and results in one document. It helps make data analysis easier to understand and reproduce because the code and its output appear together. An R Markdown file can be converted into an HTML page, PDF, or Word document.
+
+# For this example, I will explore the built-in `mtcars` dataset. It contains information about different cars, including their fuel efficiency (`mpg`) and weight (`wt`). I want to see whether heavier cars tend to have lower fuel efficiency. LaTeX can display mathematical symbols in a report. For example, an inline expression is $\alpha + \beta = \gamma$. The formula for a sample mean is:
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+$$
+
+# The following chunk loads the built-in dataset and calculates summary statistics for miles per gallon.
+
+```{r summary-statistics}
+data("mtcars")
+head(mtcars)
+summary(mtcars$mpg)
+mean(mtcars$mpg)
+```
+
+# The scatter plot below compares vehicle weight with fuel efficiency. Each point represents one car.
+
+```{r mpg-plot, fig.width=7, fig.height=5}
+plot(mtcars$wt, mtcars$mpg,
+     main = "Vehicle Weight vs. Fuel Efficiency",
+     xlab = "Weight (1,000 lbs)",
+     ylab = "Miles per Gallon (MPG)",
+     pch = 19, col = "steelblue")
+abline(lm(mpg ~ wt, data = mtcars), col = "red", lwd = 2)
+```
+
+The plot suggests a negative relationship between vehicle weight and miles per gallon: heavier cars generally have lower fuel efficiency. This is an association, not proof of causation.
+
+# Reflection and Source vs. Output Comparison
+
+R Markdown is more useful than a plain report when working with data because I can keep my explanations, calculations, and visualizations together. If I change the data or code, I can knit the document again to update the results instead of manually copying new numbers and graphs into a report.
+
+The `.Rmd` source contains Markdown headings, LaTeX notation, and code chunk markers, while the rendered HTML displays formatted headings, equations, tables or printed results, and the plot. One formatting detail to watch is that a displayed equation needs its own lines between `$$` markers, and R code needs properly closed chunk fences. A useful tip is to knit the document regularly so formatting or code errors are easier to find.
